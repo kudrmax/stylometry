@@ -1,2 +1,11 @@
 texts/.DS_Store
 .DS_Store
+.Rproj.user
+.RData
+.Rhistory
+russian-gsd-ud-2.5-191206.udpipe
+stylo_config.txt
+stylometry.Rproj
+stylometry_CA_58_MFWs_Culled_0__Classic Delta_EDGES.csv
+table_with_frequencies.txt
+wordlist.txt

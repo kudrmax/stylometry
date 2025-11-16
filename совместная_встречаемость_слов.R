@@ -14,7 +14,7 @@ library(dplyr)
 library(igraph)
 library(ggraph)
 
-path <- "набоков.txt"
+path <- "онегин.txt"
 
 # === 1. Читаем два txt-файла с поэмами ===
 # Задай правильные пути к файлам
@@ -65,7 +65,7 @@ cooc_raw <- cooccurrence(
 # чтобы граф не превратился в «ёжика». Порог подбери сам.
 cooc <- cooc_raw |>
   as_tibble() |>
-  filter(cooc == 2) |>          # можешь поставить 3, 5, 10 — как визуально лучше
+  filter(cooc >= 3) |>          # можешь поставить 3, 5, 10 — как визуально лучше
   arrange(desc(cooc))
 
 # Посмотреть таблицу (по желанию)
@@ -73,7 +73,7 @@ cooc <- cooc_raw |>
 
 # Если хочешь ограничиться, например, 50 самыми частыми парами:
 cooc_top <- cooc |>
-  slice_head(n = 50)
+  slice_head(n = 100)
 
 # === 6. Строим граф совместной встречаемости ===
 wordnetwork <- graph_from_data_frame(cooc_top)
@@ -88,5 +88,5 @@ ggraph(wordnetwork, layout = "fr") +
   geom_edge_link(aes(width = cooc), alpha = 0.8, edge_colour = "grey90", show.legend=FALSE) +
   geom_node_label(aes(label = name), col = "#1f78b4", size = 4) +
   theme_void() +
-  labs(title = "Совместная встречаемость существительных", subtitle = "De Bello Gallico 1-7")
+  labs(title = "Совместная встречаемость существительных")
 

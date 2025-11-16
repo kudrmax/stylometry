@@ -19,7 +19,7 @@ sample_n(chen_skiena, 10)
 # -----------------------------
 # убедись, что файл "онегин.txt" лежит в рабочей директории
 # getwd() покажет, какая она сейчас
-poem_raw <- readLines("онегин.txt", encoding = "UTF-8")
+poem_raw <- readLines("набоков.txt", encoding = "UTF-8")
 poem_text <- paste(poem_raw, collapse = " ")
 
 # -----------------------------
@@ -51,7 +51,7 @@ poem_tbl_clean <- poem_tbl |>
   filter(upos != "PUNCT") |>
   select(lemma) |>
   rename(token = lemma) |>
-  mutate(chunk = round(((row_number() + 50) / 100), 0))
+  mutate(chunk = round(((row_number() + 50) / 42), 0))
 
 poem_tbl_clean
 
@@ -82,9 +82,10 @@ poem_chunk_sent
 ggplot(poem_chunk_sent, aes(x = chunk, y = sum, fill = tone)) +
   geom_col(show.legend = FALSE) +
   labs(
-    title = "Эмоциональная тональность «Евгения Онегина»",
-    x = "повествовательное время (куски по 100 слов)",
+    title = "Эмоциональная тональность «Набокова»",
+    x = "повествовательное время (куски по 42 слов)",
     y = "суммарная тональность"
   ) +
   scale_fill_manual(values = c("pos" = "#78c679", "neg" = "#e34a33")) +
   theme_minimal(base_size = 14)
+
